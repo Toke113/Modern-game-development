@@ -11,6 +11,14 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Battle_Mage_Arena.h"
+#include "Net/UnrealNetwork.h"
+#include "Engine/Engine.h"
+#include "ThirdPersonMPProjectile.h"
+
+#include "Logging/LogMacros.h"
+
+// Define a log category
+DEFINE_LOG_CATEGORY_STATIC(MyLogCategory, Log, All);
 
 ABattle_Mage_ArenaCharacter::ABattle_Mage_ArenaCharacter()
 {
@@ -48,6 +56,16 @@ ABattle_Mage_ArenaCharacter::ABattle_Mage_ArenaCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	//Initialize the player's Health
+	MaxHealth = 100.0f;
+	CurrentHealth = MaxHealth;
+
+	//Initialize projectile class
+	ProjectileClass = AThirdPersonMPProjectile::StaticClass();
+	//Initialize fire rate
+	FireRate = 0.25f;
+	bIsFiringWeapon = false;
 }
 
 void ABattle_Mage_ArenaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -65,11 +83,103 @@ void ABattle_Mage_ArenaCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABattle_Mage_ArenaCharacter::Look);
+
+		// Handle firing projectiles
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &ABattle_Mage_ArenaCharacter::StartFire);
+		
 	}
 	else
 	{
 		UE_LOG(LogBattle_Mage_Arena, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
+
+	
+}
+
+void ABattle_Mage_ArenaCharacter::GetLifetimeReplicatedProps(TArray <FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	 
+	//Replicate current health.
+	DOREPLIFETIME(ABattle_Mage_ArenaCharacter, CurrentHealth);
+}
+
+void ABattle_Mage_ArenaCharacter::OnHealthUpdate()
+{
+	//Client-specific functionality
+	if (IsLocallyControlled())
+	{
+		FString healthMessage = FString::Printf(TEXT("You now have %f health remaining."), CurrentHealth);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, healthMessage);
+	 
+		if (CurrentHealth <= 0)
+		{
+			FString deathMessage = FString::Printf(TEXT("You have been killed."));
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, deathMessage);
+		}
+	}
+	 
+	//Server-specific functionality
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		FString healthMessage = FString::Printf(TEXT("%s now has %f health remaining."), *GetFName().ToString(), CurrentHealth);
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, healthMessage);
+	}
+	 
+	//Functions that occur on all machines.
+	/*
+		Any special functionality that should occur as a result of damage or death should be placed here.
+	*/
+}
+
+void ABattle_Mage_ArenaCharacter::OnRep_CurrentHealth()
+{
+	OnHealthUpdate();
+}
+
+void ABattle_Mage_ArenaCharacter::SetCurrentHealth(float healthValue)
+{
+	if (GetLocalRole() == ROLE_Authority)
+	{
+		CurrentHealth = FMath::Clamp(healthValue, 0.f, MaxHealth);
+		OnHealthUpdate();
+	}
+}
+
+float ABattle_Mage_ArenaCharacter::TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	float damageApplied = CurrentHealth - DamageTaken;
+	SetCurrentHealth(damageApplied);
+	return damageApplied;
+}
+
+void ABattle_Mage_ArenaCharacter::StartFire()
+{
+	printf("Hello");
+	UE_LOG(MyLogCategory, Warning, TEXT("This is a warning message!"));
+	
+	bIsFiringWeapon = true;
+	UWorld* World = GetWorld();
+	World->GetTimerManager().SetTimer(FiringTimer, this, &ABattle_Mage_ArenaCharacter::StopFire, FireRate, false);
+	HandleFire();
+	
+}
+
+void ABattle_Mage_ArenaCharacter::StopFire()
+{
+	bIsFiringWeapon = false;
+}
+
+void ABattle_Mage_ArenaCharacter::HandleFire_Implementation()
+{
+	FVector spawnLocation = GetActorLocation() + ( GetActorRotation().Vector()  * 100.0f ) + (GetActorUpVector() * 50.0f);
+	FRotator spawnRotation = GetActorRotation();
+	 
+	FActorSpawnParameters spawnParameters;
+	spawnParameters.Instigator = GetInstigator();
+	spawnParameters.Owner = this;
+	 
+	AThirdPersonMPProjectile* spawnedProjectile = GetWorld()->SpawnActor<AThirdPersonMPProjectile>(spawnLocation, spawnRotation, spawnParameters);
 }
 
 void ABattle_Mage_ArenaCharacter::Move(const FInputActionValue& Value)
