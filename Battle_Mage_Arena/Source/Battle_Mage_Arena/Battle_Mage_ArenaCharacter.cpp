@@ -84,8 +84,7 @@ void ABattle_Mage_ArenaCharacter::SetupPlayerInputComponent(UInputComponent* Pla
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ABattle_Mage_ArenaCharacter::Look);
 
-		// Handle firing projectiles
-		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &ABattle_Mage_ArenaCharacter::StartFire);
+		
 		
 	}
 	else
