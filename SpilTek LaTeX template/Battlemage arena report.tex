@@ -15,23 +15,18 @@
 {\footnotesize \textsuperscript{*}Sub-title (optional)}
 }
 
-\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+\author{\IEEEauthorblockN{1\textsuperscript{st} Toke Odgaard-Jans}
 \IEEEauthorblockA{email address}
 \and
-\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
+\IEEEauthorblockN{2\textsuperscript{nd} Marcus Elmkvist}
 \IEEEauthorblockA{email address}
 \and
-\IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+\IEEEauthorblockN{3\textsuperscript{rd} Oliver}
 \IEEEauthorblockA{email address}
 \and
-\IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockN{4\textsuperscript{th} Mansoor}
 \IEEEauthorblockA{email address}
-\and
-\IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{email address}
-\and
-\IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{email address}
+
 }
 
 \maketitle
@@ -49,6 +44,36 @@ Xxxxx
 \section{Method/Implementation}
 Xxxxx
 
+\subsection{Iteration 1}
+The first iteration was focussed on setting up the project and implementing some basic online functionality.
+
+\subsubsection{About}
+The purpose of this iteration was to setup the project and implement basic functionality for testing purposes. We needed to install Unreal Engine, ensure all the team members could work on the project, and set up version control using git. Character movement and physics manipulation should be synchronized across client and server. As such, this iteration also concerned learning about the Unreal Engine 5 client/server model, synchronizing player movement, and implementing a physics object which had its location and physics properties synchronized across client and server.
+
+We also implemented a force spell that pushes the object in a direction by applying a force to it.
+
+Finally, we implemented a simple health system for the player, so that colliding with the box would result in the player taking damage.
+
+\subsubsection{Evaluation}
+Since the goal of this iteration was to test if the technical aspects of the game worked, testing was done internally in the group. After a feature had been developed, it would be playtested on two connected clients that were simulated by the engine.  The success of this iteration was judged to the extent that the synchronized objects behaved as expected.
+
+We used the built-in systems for synchronization and online play to synchronize the box, the player, and player health. Making it so the player took damage when hit by the box was more challenging. The game only registered a hit when the player walked into the box, not when the box was thrown at the player.
+
+\subsubsection{Reflections and decisions}
+Most systems worked well. For the next iteration it was agreed that we would get the player to take damage when hit by physics-affected objects. Otherwise, the next iteration would be focussed on adding new features to the game.
+
+\subsection{Iteration X}
+This iteration concerned getting the game ready for user testing.
+
+\subsubsection{About}
+Xxxxx
+
+\subsubsection{Evaluation}
+Xxxxx
+
+\subsubsection{Reflections and decisions}
+Xxxxx
+
 \subsection{Iteration X}
 Xxxxx
 
@@ -60,6 +85,7 @@ Xxxxx
 
 \subsubsection{Reflections and decisions}
 Xxxxx
+
 
 \subsection{Final iteration}
 Xxxxx
