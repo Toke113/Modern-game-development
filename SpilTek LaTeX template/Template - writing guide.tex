@@ -1,0 +1,255 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{csquotes}
+\usepackage{soul}
+\usepackage{hyperref}
+\usepackage{listings}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Paper Title*\\
+{\footnotesize \textsuperscript{*}Sub-title (optional)}
+}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+\IEEEauthorblockA{email address}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
+\IEEEauthorblockA{email address}
+\and
+\IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+\IEEEauthorblockA{email address}
+\and
+\IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{email address}
+\and
+\IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{email address}
+\and
+\IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
+\IEEEauthorblockA{email address}
+}
+
+\maketitle
+
+\begin{abstract}
+Summary of the report, including the problem, methodology, results, and conclusions (150-250 words). If applicable, include a link to a video of the project.
+\end{abstract}
+
+\section{Introduction}
+
+The purpose of this section is make the reader interested and informed in the project.
+\begin{itemize}
+	\item Background of the project: what is the problem domain? A paragraph or two to give relevant factual information about what we are talking about. Ideally this should allow non-experts to more or less understand what the report is about.
+	\item What is the problem, why is it a problem, and why is it important? (Is it something that hasn’t been studied yet? Is there an unsolved issue? Previous work presents inconclusive/contradicting results? Is there a new technology we can leverage to gain more knowledge?). One or two paragraphs.
+	\item Objectives of the report: what is your actual goal? What are you hoping to achieve? About one paragraph.
+	\item How do you plan on achieving your goal? This is where you want do define your research questions and hypotheses. When you define these, you are forming the basis of your project, and should be the focus of the rest of the text. If you have a very broad RQ, try to break it down in smaller, more quantifiable questions. As an example:
+	\begin{itemize}
+		\item H: Games can help teaching math to young pupils
+		\item RQ1: How can we design a game that includes math concepts while still being entertaining to young pupils?
+		\item RQ2: How well does it compare with traditional educational materials?
+	\end{itemize}
+\end{itemize}
+
+\section{Literature review}
+
+The purpose of this section is to summarize previous work in the area you are working on and describe key theories and techniques that you are going to use.
+\begin{itemize}
+	\item What are the main theories and techniques that relate to your project? Have one or two paragraph for each, giving a summary of what they are and how they relate to your project. For example, these could be a theory that you use for the design of your project (e.g., gamification concepts), theories/methods that you use in the implementation (e.g., some AI technique), or theories/methods that you use in the evaluation of your project (e.g., flow theory, methods of user testing like A/B testing).
+	\item Summary of existing studies and research on the topic. What has been done before? What other work relates to yours and how. For example: “Woodstock et al. developed a game built around algebra concepts \cite{woodstock2018} but haven’t provided a study to evaluate the efficacy of the game in a learning context”.
+\end{itemize}
+
+
+\section{Method/Implementation}
+
+This is likely going to be the largest part of the report. Here you want do describe the full process you went through in implementing the solution to your problem. Ideally this should be detailed enough that somebody else would be able to reproduce your work in case you drop dead. Keep in mind that, while we provide a general structure here, it could need some modifications depending on the course you are writing for.
+
+\begin{displayquote}
+{\color{red}
+Warning: depending on the course, coding highlights should also be included. Usually only highlighting solutions to specifically complex problems.
+}
+\end{displayquote}
+
+\subsection{Iteration X}
+
+You will often go through various iterations of product/game design, duplicate this subsection for each iteration before the final one. 
+
+\begin{itemize}
+	\item Usually, iteration 1 would be a low fidelity prototype.
+	\item Iteration 2 could be a high-fidelity prototype (vertical slice or functional prototype).
+	\item Iteration 3 or later are refinements (extended functionality, improvements/polish, usability tweaks, bug-fixing) or the final product.
+\end{itemize}
+
+\subsubsection{About}
+
+Describe what this iteration was all about.
+
+\begin{itemize}
+	\item What is the purpose of this iteration?
+	\item What were the goals?
+	\item Describe and justify design decisions. For example, “we implemented feature X because it relates to gamification concept Y”, or “in the previous iteration we identified issues with the user interface, so we reworked by changing X, Y, and Z.”
+	\item Include images/sketches. 
+\end{itemize}
+
+\subsubsection{Evaluation}
+
+Describe how you evaluated this iteration, for example what kind of user testing or technical testing you conducted. This should include:
+
+\begin{itemize}
+	\item Test design: explain what is the objective of the study: what kind of information are you trying to obtain? What kind of study did you conduct? (Usability test, playtest, something more related to your RQs, etc.?) Did you use a specific established methodology? Usually this is not a very large part and serves as an introduction to your test.
+	\item Test methodology: this is usually a larger part where you need to provide all the details of how you conducted your test. 
+	\begin{itemize}
+		\item How did you structure the test? For example, “The participant played the game while doing think-aloud, then compiled a survey.”
+		\item Ethical reflections: is there some problematic aspect that you had to address? If so, how did you address it? How are you compliant with GDPR laws? 
+		\item Technical details: where did you conduct the study? What hardware was used? 
+		\item Detailed information about the test. For example, if you used a survey, what questions were included? If you conducted interviews, how did you structure them? How did you collect the data?
+	\end{itemize}
+	\item Results of the test
+	\begin{itemize}
+		\item How many participants did you have?
+		\item What are some basic demographics for the participants?
+		\item Present the data collected (use tables and graphs, rather than text). 
+		\item Make sure you mention what statistical methods you use (and why).
+	\end{itemize}
+\end{itemize}
+
+
+\subsubsection{Reflections and decisions}
+In this section describe how are you using the results you described in the previous section to further your development, to answer your research questions, or in general to evaluate your project (this last part is mostly relevant for the final iteration)
+
+\begin{itemize}
+	\item How do you interpret the results you just described? What do they mean?
+	\item How are you planning to use these in the following iteration?
+\end{itemize}
+
+
+\subsection{Final iteration}
+
+This section describes the final tweaks you applied from the previous iteration. Show the main differences and describe the features of the final product (just like the “About” section in the previous iterations)
+
+\section{Evaluation}
+
+\begin{displayquote}
+{\color{red}
+Warning: we suggest that the final evaluation of your project should have its own section rather than being in the Method/Implementation one.
+}
+\end{displayquote}
+
+This section, while structured the same as the Evaluation section defined before, should deal with the study conducted on the final product of your project. \hl{This study must address your research questions}. 
+
+
+\section{Results}
+
+Again, same content as the results section described before, but it’s expected that this section will be larger and more thorough than the ones for the intermediate iterations. Remember to use appropriate methods and statistical tests to provide an analysis. Make sure you respond to each research question/hypothesis!
+
+\section{Discussion}
+
+\begin{displayquote}
+{\color{red}
+Note on opinions: by default, try to avoid opinions, you want to base everything on facts or previous literature. The discussion section is the exception to that rule: here we want to see what your interpretation of the results is (but this should still be based on the results you obtained)
+}
+\end{displayquote}
+
+This is the section in which you want to tell the reader what the results you obtained mean, and where you want to convince the reader that you did in fact answer your research questions.
+
+Remember to use appropriate methods and statistical tests to provide an analysis of the results and \hl{make sure you respond to each research question/hypothesis!}
+
+Tell the reader what is bad about your study (are there some limitations? Maybe you didn’t have enough participants to have some strong results? Maybe your participants are not representative of the target population? Maybe you realized the testing methods you used have some pitfalls?) How do you expect these limitations might affect your results?
+
+What is good about your study? (Are there some strengths to it? Did you do something particularly smart? Did you use some innovative equipment?)
+
+Can your results compare to existing literature? Why yes/no? If yes, how do they compare? Limit this to a brief summary of how your results fit with the existing knowledge.
+
+
+\section{Conclusions}
+
+Your final considerations:
+
+\begin{itemize}
+	\item Very shortly, what did you find out?
+	\item What can this be used for? Here you want to revisit the problem domain you described in the introduction and tell us how your results fit in.
+	\item What would be the next step in this avenue of research (if any)?
+\end{itemize}
+
+\bibliographystyle{ieeetr}
+\bibliography{biblio} %Uncomment this once you add some citations in the text to add the references section
+
+\section*{Appendix}
+
+\subsection{References}
+
+The reference style to use is the IEEE one, below we provide a short summary, for more information check out \url{https://ieeeauthorcenter.ieee.org/wp-content/uploads/IEEE-Reference-Guide.pdf} and the style guide.
+
+The style guide adds referenced directly in the LaTeX file, but I suggest you use BibTex instead. This document is set up to provide an example of BibText usage. The main difference is that the bibliography is stored separately (see the biblio.bib file). BibTex provides various advantages compared with the example in the style guide, the main ones is that the order of references in the bib file doesn't matter (the references are properly ordered every time you compile the document) and that you if you don't cite a reference it is not included in the final document automatically. References are also formatted automatically to match the IEEE style.
+
+Citations must be numbered consecutively within brackets according to when they are cited in the text \cite{Nobody06}; this is all done/updated automatically when you use the \textbackslash cite command. The sentence punctuation follows the bracket \cite{Nobody06}. Refer simply to the reference number, as in \cite{Nobody07}—do not use “Ref. \cite{Nobody07}” or “reference  \cite{Nobody07}” except at the beginning of a sentence: “Reference \cite{Nobody07} was the first ...”. The order of the references in the bibliography should follow the order of citation in the report, i.e. the first paper you cite will be the first in the references, the second one the second, etc. Thankfully that is done automatically by LaTeX: try to delete the citation in the literature review section and see how the numbers are updated as you recompile the project.
+
+The reference is usually immediately after the referred theory, algorithm, author, etc. If you refer to the whole sentence or paragraph, put the reference at the end (before full stop, if it refers only to the previous sentence, after the full stop if it refers to the paragraph).
+
+If you express somebody else’s ideas by your own words, then put the reference immediately after the idea. If you express somebody’s ideas by her/his own words, then it is a quote, remember to use quotation marks “…”!
+
+If you want to reference to something that is not an academic paper (like a webpage) use a footnote instead. See appendix D for how to format footnotes.
+
+\subsection{Figures and Tables}
+
+\begin{table}[htbp]
+\caption{Table Type Styles}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Table}&\multicolumn{3}{|c|}{\textbf{Table Column Head}} \\
+\cline{2-4} 
+\textbf{Head} & \textbf{\textit{Table column subhead}}& \textbf{\textit{Subhead}}& \textbf{\textit{Subhead}} \\
+\hline
+copy& More table copy$^{\mathrm{a}}$& &  \\
+\hline
+\multicolumn{4}{l}{$^{\mathrm{a}}$Sample of a Table footnote.}
+\end{tabular}
+\label{tab1}
+\end{center}
+\end{table}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics{fig1.png}}
+\caption{Example of a figure caption.}
+\label{fig}
+\end{figure}
+
+Figures and tables should be only at the top and bottom of columns. Avoid placing them in the middle of columns. Large figures and tables may span across both columns. Figure captions should be below the figures; table heads should appear above the tables. Insert figures and tables after they are cited in the text, or at most on the same page. Use the abbreviation “Fig. \ref{fig}”, even at the beginning of a sentence. 
+
+Remember that you can use labels and the \textbackslash ref command to have LaTeX update the number automatically if you move figures/tables around. See the previous paragraph (in the code) for an example.
+
+\subsection{Code snippets}
+
+The easiest way to add code to the report is to take a screenshot and add it as if it was a figure.
+
+Another option is to add the code directly, for example using the listings package. Here follows an example:
+
+\begin{lstlisting}[language={[Sharp]C}]
+public class Player : MonoBehaviour
+{
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+        
+    }
+}
+\end{lstlisting}
+
+\subsection{Footnotes}
+
+You can add footnotes by using the \textbackslash footnote command. That will add a new footnote automatically and number it in the text like this\footnote{This is a footnote.}. Remember to use footnotes if you want to reference non-academic documents, such as links. For example, “We used a C\# machine learning variable to implement an artificial neural network\footnote{\url{https://www.ml-library.org}}.” Do not put footnotes in the abstract or reference list. Use letters instead of numbers if you need table footnotes.
+
+\end{document}
