@@ -144,7 +144,7 @@ void ABattle_Mage_ArenaCharacter::SetCurrentHealth(float healthValue)
 		OnHealthUpdate();
 	}
 }
-
+//cjust a commenyt ottt to get this with in the push
 float ABattle_Mage_ArenaCharacter::TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
 	float damageApplied = CurrentHealth - DamageTaken;
