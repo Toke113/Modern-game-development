@@ -7,103 +7,159 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{mathtools}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
-    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Conference Paper Title*\\
-{\footnotesize \textsuperscript{*}Sub-title (optional)}
-}
+    \title{Development of Battlemage Arena
+    }
 
-\author{\IEEEauthorblockN{1\textsuperscript{st} Toke Odgaard-Jans}
-\IEEEauthorblockA{email address}
-\and
-\IEEEauthorblockN{2\textsuperscript{nd} Marcus Elmkvist}
-\IEEEauthorblockA{email address}
-\and
-\IEEEauthorblockN{3\textsuperscript{rd} Oliver}
-\IEEEauthorblockA{email address}
-\and
-\IEEEauthorblockN{4\textsuperscript{th} Mansoor}
-\IEEEauthorblockA{email address}
+    \author{\IEEEauthorblockN{1\textsuperscript{st} Toke Odgaard-Jans}
+    \IEEEauthorblockA{toodg22@student.sdu.dk }
+    \and
+    \IEEEauthorblockN{2\textsuperscript{nd} Marcus Elmkvist}
+    \IEEEauthorblockA{maelm22@student.sdu.dk}
+    \and
+    \IEEEauthorblockN{3\textsuperscript{rd} Oliver}
+    \IEEEauthorblockA{owagn20@student.sdu.dk}
+    \and
+    \IEEEauthorblockN{4\textsuperscript{th} Mansoor}
+    \IEEEauthorblockA{moahm25@student.sdu.dk}
 
-}
+    }
 
-\maketitle
-
-\begin{abstract}
-Xxxxx
-\end{abstract}
-
-\section{Introduction}
-Xxxxx
-
-\section{Literature review}
-Xxxxx
-
-\section{Method/Implementation}
-Xxxxx
-
-\subsection{Iteration 1}
-The first iteration was focussed on setting up the project and implementing some basic online functionality.
+    \maketitle
 
 
-\subsubsection{About}
-The purpose of this iteration was to setup the project and implement basic functionality for testing purposes. We needed to install Unreal Engine, ensure all the team members could work on the project, and set up version control using git. Character movement and physics manipulation should be synchronized across client and server. As such, this iteration also concerned learning about the Unreal Engine 5 client/server model, synchronizing player movement, and implementing a physics object which had its location and physics properties synchronized across client and server.
+    \section{Introduction}\label{sec:introduction}
 
-We also implemented a force spell that pushes the object in a direction by applying a force to it.
+    The goal of this project is to create a multiplayer game centered around physics-based interactions.
+    The game takes place in a magical tournament where two players compete in an arena using physics-driven spells.
 
-Finally, we implemented a simple health system for the player, so that colliding with the box would result in the player taking damage.
+    Unlike traditional combat systems, players cannot directly damage each other.
+    Instead, damage occurs indirectly through environmental interactions.
+    The damage calculation is based on physical forces, heavier and faster objects cause more damage.
 
-\subsubsection{Evaluation}
-Since the goal of this iteration was to test if the technical aspects of the game worked, testing was done internally in the group. After a feature had been developed, it would be playtested on two connected clients that were simulated by the engine.  The success of this iteration was judged to the extent that the synchronized objects behaved as expected.
-
-We used the built-in systems for synchronization and online play to synchronize the box, the player, and player health. Making it so the player took damage when hit by the box was more challenging. The game only registered a hit when the player walked into the box, not when the box was thrown at the player.
-
-\subsubsection{Reflections and decisions}
-Most systems worked well. For the next iteration it was agreed that we would get the player to take damage when hit by physics-affected objects. Otherwise, the next iteration would be focussed on adding new features to the game.
-
-\subsection{Iteration X}
-This iteration concerned getting the game ready for user testing.
-
-\subsubsection{About}
-Xxxxx
-
-\subsubsection{Evaluation}
-Xxxxx
-
-\subsubsection{Reflections and decisions}
-Xxxxx
-
-\subsection{Iteration X}
-Xxxxx
-
-\subsubsection{About}
-Xxxxx
-
-\subsubsection{Evaluation}
-Xxxxx
-
-\subsubsection{Reflections and decisions}
-Xxxxx
+    Spells were supposed to interact dynamically with the environment, allowing creative combinations for unique effects.
+    Players were also supposed to take damage from traps or hazards within the arena.
+    To enhance realism and fun, ragdoll physics is implemented for player characters.
 
 
-\subsection{Final iteration}
-Xxxxx
+    \section{Game design}\label{sec:game-design}
 
-\section{Evaluation}
-Xxxxx
+    \subsection{Overview}\label{subsec:overview}
+    Battle Mage Arena is a multiplayer game where players control mages in an arena and use physics-based spells to manipulate the environment.
+    The core mechanic is indirect damage: players cannot harm each other directly but must use spells to create environmental hazards that deal damage through physical interactions.
 
-\section{Results}
-Xxxxx
+    \subsection{Main Mechanics}\label{subsec:main-mechanics}
+    \begin{itemize}
+        \item \textbf{Physics-Based Combat:} Spells do not deal direct damage.
+        Instead, they apply forces to objects, creating dynamic interactions.
+        Damage is calculated based on impact force using the simplified formula:
+        \begin{equation}
+            \text{Force} = m \times v \label{eq:equation}
+        \end{equation}
 
-\section{Discussion}
-Xxxxx
+        where \(m\) is the object's mass and \(v\) its velocity.
+        Heavier and faster objects cause more damage.
 
-\section{Conclusions}
-Xxxxx 
+        \item \textbf{Spells:}
+        \begin{itemize}
+            \item \textbf{Force Spell:} Applies an impulse to objects via a raycast, pushing them in the opposite direction of the cast.
+            \item \textbf{Ice Spell:} Creates an ice surface that removes friction for actors in contact, enabling creative movement and trap setups.
+            \item \textbf{Mass Increase Spell:} Upon hitting a synchronized object with a raycast, the objects mass and size are both increased.
+        \end{itemize}
 
-\bibliographystyle{ieeetr}
-%\bibliography{biblio} %Uncomment this once you add some citations in the text to add the references section
+        \item \textbf{Health and Ragdoll:} When a player is hit with sufficient force, they take damage and enter ragdoll mode for a short cooldown period.
+
+        \item \textbf{Multiplayer Synchronization:} The game uses Unreal Engine’s listen server model.
+        Positions, velocities, and spell effects are synchronized across clients to maintain consistent physics interactions.
+
+        \item \textbf{Game Modes:} Multiple game modes are supported through a parent-child blueprint structure, allowing easy extension and customization.
+
+        \item \textbf{HUD and Feedback:} Players have a HUD displaying health, score, and a timer.
+        Audio feedback includes spell sounds.
+    \end{itemize}
+    
+
+    \section{Implementation}
+
+    \subsection{Damage}
+
+    \subsection{Ragdoll}
+
+    \subsection{Force Push}
+
+    \subsection{Healthbar}
+
+    \subsection{Ice Spell}
+
+    \subsection{Mass Increase}
+
+
+    \section{Development}
+    Xxxxx
+
+    \subsection{Iteration 1}
+    The first iteration was focussed on setting up the project and implementing some basic online functionality.
+
+    \subsubsection{About}
+    The purpose of this iteration was to setup the project and implement basic functionality for testing purposes.
+    We needed to install Unreal Engine, ensure all the team members could work on the project, and set up version control using git.
+    Character movement and physics manipulation should be synchronized across client and server.
+    As such, this iteration also concerned learning about the Unreal Engine 5 client/server model, synchronizing player movement, and implementing a physics object which had its location and physics properties synchronized across client and server.
+
+    We also implemented a force spell that pushes the object in a direction by applying a force to it.
+
+    Finally, we implemented a simple health system for the player, so that colliding with the box would result in the player taking damage.
+
+    \subsubsection{Evaluation}
+    Since the goal of this iteration was to test if the technical aspects of the game worked, testing was done internally in the group.
+    After a feature had been developed, it would be playtested on two connected clients that were simulated by the engine.
+    The success of this iteration was judged to the extent that the synchronized objects behaved as expected.
+
+    We used the built-in systems for synchronization and online play to synchronize the box, the player, and player health.
+    Making it so the player took damage when hit by the box was more challenging.
+    The game only registered a hit when the player walked into the box, not when the box was thrown at the player.
+
+    \subsubsection{Reflections and decisions}
+    Most systems worked well.
+    For the next iteration it was agreed that we would get the player to take damage when hit by physics-affected objects.
+    Otherwise, the next iteration would be focussed on adding new features to the game.
+
+    \subsection{Iteration 2}
+    This iteration concerned getting the game ready for user testing.
+
+    \subsubsection{About}
+    Xxxxx
+
+    \subsubsection{Evaluation}
+    Xxxxx
+
+    \subsubsection{Reflections and decisions}
+    Xxxxx
+
+    \subsection{Iteration 3}
+    Xxxxx
+
+    \subsubsection{About}
+    Xxxxx
+
+    \subsubsection{Evaluation}
+    Xxxxx
+
+    \subsubsection{Reflections and decisions}
+    Xxxxx
+
+    \subsection{Final iteration}
+    Xxxxx
+
+
+    \section{Reflection}
+    Xxxxx
+
+    %\bibliographystyle{ieeetr}
+    %\bibliography{biblio} %Uncomment this once you add some citations in the text to add the references section
 
 \end{document}
