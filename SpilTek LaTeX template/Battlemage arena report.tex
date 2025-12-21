@@ -80,8 +80,19 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
         \item \textbf{HUD and Feedback:} Players have a HUD displaying health, score, and a timer.
         Audio feedback includes spell sounds.
+        \item \textbf{Levels and level Selector: } The games has three levels
+        \begin{itemize}
+            \item \textbf{Arena Battle:} A small arena filled with synchronized physics boxes.
+            The goal is to eliminate the other player by hitting them with a box.
+            \item \textbf{Soccer:} A small soccer arena with a ball in the middle, the goal is to get the ball into the other players' goal.
+            First to 5 wins.
+            \item \textbf{Coin Collection:} Small arena filled with synchronized physics boxes.
+            Coins spawn at random points within the level.
+            The goal is to collect 5 coins to win.
+            If hit by a physics box you will lose coins.
+        \end{itemize}
     \end{itemize}
-    
+
 
     \section{Implementation}
 
@@ -157,9 +168,29 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 
     \section{Reflection}
-    Xxxxx
 
-    %\bibliographystyle{ieeetr}
-    %\bibliography{biblio} %Uncomment this once you add some citations in the text to add the references section
+
+    Throughout this project, we have successfully developed the necessary mechanics and functionalities to effectively showcase the concept of the game.
+    However, with additional time, there are several mechanics we would consider implementing to enhance gameplay and player experience.
+
+    \begin{enumerate}
+        \item \textbf{Environmental Hazards and Enhanced Maps:} The current game maps are somewhat simplistic in both aesthetics and functionality.
+        Given more time for development, we could introduce environmental hazards that create dynamic challenges for players, enhancing the overall gameplay experience.
+
+        \item \textbf{Destruction of the Environment:} Enhancing the environment's interactivity through destructible elements would add depth.
+        For instance, when a player uses a spell or interacts with an object (like a pillar), the environment could react by collapsing, with debris functioning as synchronized damage objects.
+        This would not only increase visual appeal but also introduce strategic elements to gameplay as players navigate the altered terrain.
+
+        \item \textbf{Expanded Spell Variety:} Currently, the game only features three spells, limiting the strategic interactions between players.
+        By adding more spells, we could create opportunities for more complex interactions.
+        For example, spells could be designed to spawn additional projectiles for players to use against opponents or create new environmental hazards.
+        If fall damage were to be introduced, a spell that propels an opponent into the air could create thrilling moments in the game.
+
+        \item \textbf{Improved Controls and Movement Mechanics:} At present, player movement is limited to basic walking and jumping.
+        Particularly in the soccer game mode, a running mechanic would significantly enhance player control and positioning, allowing for a more immersive gameplay experience.
+    \end{enumerate}
+
+    Incorporating these mechanics would not only improve the visual and strategic elements of the game but also elevate the user experience by making the gameplay more engaging and interactive.
+
 
 \end{document}
