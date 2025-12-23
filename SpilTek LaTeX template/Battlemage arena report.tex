@@ -8,6 +8,7 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{mathtools}
+\usepackage{hyperref}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
 T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -61,7 +62,7 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
             \text{Force} = m \times v \label{eq:equation}
         \end{equation}
 
-        where \(m\) is the object's mass and \(v\) its velocity.
+        Where \(m\) is the object's mass and \(v\) its velocity.
         Heavier and faster objects cause more damage.
 
         \item \textbf{Spells:}
@@ -97,6 +98,47 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     \section{Implementation}
 
     \subsection{Damage}
+
+    The damage implementation was twofold.
+    First, it involved a parent blueprint, ``BP\_Synced\_Box'' designed for all objects that could be affected by forces and for damage detection on player characters.
+    Once a hit is detected on an object, it checks whether the collided object is a player blueprint.
+    If this is the case, it calls the ``Hitting'' event on the character blueprint and passes in itself and the component that detected the collision (see \autoref{fig:HitDetect}).
+
+    \begin{figure}[htbp]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/Damage/CollisionDetect}}
+        \caption{Hit Detection Blueprint which calls the hitting event on the player charachter blueprint.}
+        \label{fig:HitDetect}
+    \end{figure}
+
+    In the ``Hitting'' event, it is checked whether the collision was detected on the server or the client.
+    If the detection occurs on the client, nothing happens; however, if it occurs on the server, the process continues.
+    It then checks whether the player can currently receive any damage.
+    If so, it proceeds.
+    As a precaution, it verifies that the event is being called by a synced object that is supposed to call it (see \autoref{fig:ServerTjek}). If this is the case, the process continues for the damage calculation.
+
+    \begin{figure}[htbp]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/Damage/TjekIfServerOrNotAndCanDamage}}
+        \caption{Tjeks whether the hit was detected on the server or on a client.}
+        \label{fig:ServerTjek}
+    \end{figure}
+
+    From the provided references, both the mass of the colliding object and its velocity at the moment of collision are extracted.
+    They are then multiplied together to calculate the force with which the player is hit.
+    The force is checked to see if it exceeds the minimum threshold of 50.
+    If it does, the force is clamped between specified minimum and maximum values and mapped to corresponding minimum and maximum damage values.
+    This damage is then applied to the player's health through a function call, Take Damage (see Figure \autoref{fig:CalcDamage}).
+
+    \begin{figure}[htbp]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/Damage/CalcDamage}}
+        \caption{Calculating damage based on velocity and mass.}
+        \label{fig:CalcDamage}
+    \end{figure}
 
     \subsection{Ragdoll}
 
