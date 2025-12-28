@@ -142,14 +142,100 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
     \subsection{Ragdoll}
 
-    \subsection{Force Push}
+    \subsection{Parent Spell Blueprint}
+    A parent spell blueprint is created to a standard way to "fire" a spell.
+    So when spells are created by differnt people the way to cast them is the same.
+    The event in the parent blueprint is called "Activate Spell".
 
-    \subsection{Healthbar}
+    \begin{figure}[htbp]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/Spells/ForceChildImpl}}
+        \caption{Implementation of "Activate Spell" in the Force Spell child blueprint.}
+        \label{fig:ForceChildImpl}
+    \end{figure}
 
-    \subsection{Ice Spell}
+    The parent event "Activate Spell" is being used in the Force Spell child blueprint.
+    When the event is called, the spell logic is executed along with the differnt spell effects.
+    The player as an input makes possible to get any details about the player, that are nesserary for the spell.
+    And if a spell requires something new, it can be added to the player, this could be a new location to fire a spell from. 
+    That is posible with having to change the parent blueprint.
+
+    \subsubsection{Force Push}
+    How the "Force Push" spell works is that when the player casts the spell, raycasts are shot in the direction the player is looking.
+    There are "Spell points" which just are static meshes with no meshes, they are just points and they are places at the camera.
+    Then the raycasts are shot from these points, they form a cyllinder shape making it easier to hit objects.
+    When these raycasts hit a "BPSyncedBox" object, the "Apply Force" function is called on the hit object to make it move.
+
+    \subsubsection{Ice Spell}
 
     \subsection{Mass Increase}
 
+    \subsection{Healthbar}
+
+    \subsection{Game Modes}
+    There are three different game modes in the game, Arena Battle, Soccer, and Coin Collection.
+    A gamemode consists of two blueprints, a gamemode and a gamestate blueprint.
+    A parent gamemode and gamestate blueprint is made, and each gamemode has its own child gamemode and gamestate blueprint.
+    This is to centralize the shared logic and variables between gamemodes and ruduce code duplication. 
+    An example of this is the function "Initial Player setup", this function adds values to the variables "Player 1" and "Player 2" of the Character type.
+    And adds them to the array "Players".
+    It also sets the player location to that of their spawn points.
+    This function is called in all the gamemodes' "Begin Play" event, so the code is not duplicated in each gamemode.
+    \begin{figure}[htbp]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/ParentGamemode/Part_Initial_Player_Setup}}
+        \caption{A Part of the "Initial Player Setup" function in the parent gamemode.}
+        \label{fig:InitialPlayerSetup}
+    \end{figure}
+    After "Initial Player Setup" is called, the gamemode specific logic begins. 
+    For example in the Coin Collection gamemode, the spawn points for the coins are collected and put into the array "Coin Spawn Points", and then spawns a coin.
+    It will then set the players scores to 0.
+    \begin{figure}[htbp]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/ParentGamemode/Coin_Next_Part}}
+        \caption{What comes after "Initial Player Setup" in the Coin Collection gamemode.}
+        \label{fig:Coin_Next_Part}
+    \end{figure}
+    The parent gamestate only does one thing, it has a int variable called "Gamemode int", and this variable is set by the children states.
+    This is to tell the HUD which gamemode is currently being played so it can update the display accordingly.
+    It is also used to enble gamemode specific features in the player character blueprint, depending on the "gamemode int" value the healthbar will show.
+    The reason to have the "gamemode int" variable in the gamestate is that gamestates are replicated to clients, and gamemodes are not.
+    So a client, not the hosting client which is also the server, would not be able to see the "gamemode int" if it where in the gamemode.
+
+
+    \subsection{HUD}
+    The HUD that is displayed to the player is made using the UserWidget blueprint.
+    Multiple are being used at the same time to display the different elements of the HUD.
+    And with multople gamemodes, some UI elements are only nesserary for certain gamemodes.
+    So the approach to making the HUD was to be modular, and make small wigdets that only handled onw thing.
+    Then in the Player Controller called BPThirdPersonPlayerController, in the function called "UI Setup" was made.
+    In "UI Setup" all the widgtes are created and added to the viewport depending on the gamemode.
+    How this is achieved is by getting the gamemode int from the gameststate, and match that with the correct branch.
+    At the correct branch, the widgets are created and added to the viewport.
+    This makes the HUD easy to change and add too.
+    \begin{figure}[htbp]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/PlayerController/UIsetup}}
+        \caption{UI Setup in the Player Controller.}
+        \label{fig:UIsetup}
+    \end{figure}
+
+    \subsubsection{Spell Selector}
+    The spell selector widget is the user widget that displays the spells available to the player, and the the current one selected.
+    The widget displays three images of the same color, the color is differnt if the spell is selected or not.
+    \begin{figure}[htbp]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/PlayerController/ChangeSpell}}
+        \caption{The "change select" function.}
+        \label{fig:ChangeSpell}
+    \end{figure}
+    The "change select" function is called when the player uses the scroll wheel to change the spell.
+    The function takes an integer as an input, and the function will change the color of the cooresponding spell to the integer.
 
     \section{Development}
     Xxxxx
