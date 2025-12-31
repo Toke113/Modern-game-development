@@ -9,6 +9,7 @@
 \usepackage{xcolor}
 \usepackage{mathtools}
 \usepackage{hyperref}
+\usepackage{float}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
 T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -130,7 +131,7 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     They are then multiplied together to calculate the force with which the player is hit.
     The force is checked to see if it exceeds the minimum threshold of 50.
     If it does, the force is clamped between specified minimum and maximum values and mapped to corresponding minimum and maximum damage values.
-    This damage is then applied to the player's health through a function call, Take Damage (see Figure \autoref{fig:CalcDamage}).
+    This damage is then applied to the player's health through a function call, Take Damage (see \autoref{fig:CalcDamage}).
 
     \begin{figure}[htbp]
         \centerline{\includegraphics
@@ -169,9 +170,95 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
     \subsubsection{Ice Spell}
 
-    \subsection{Mass Increase}
+    \subsubsection{Mass Increase}
+    When the growth spell is cast, we set an increment factor (IncFactor) to 1.15, corresponding to a 15\% increase in size and mass. We then perform a raycast (line trace), similar to the one used for the Force spell, and read the resulting HitResult. If the hit actor is of type BP\_Synced\_Box, we first access its Static Mesh Component and obtain its current mass. This mass is multiplied by IncFactor, and the new value is applied using the Set Mass Override function. Next, we retrieve the actor’s root scene component, read its current world scale, multiply each axis of the scale by IncFactor, and write the result back using Set World Scale 3D. Consequently, each successful cast of the spell makes the targeted box uniformly larger and heavier.
 
     \subsection{Healthbar}
+    The health bar system is implemented using Unreal Engine’s replicated variables and widget components to ensure consistent feedback in a multiplayer environment. Each character owns a CurrHealth variable that is replicated from the server to all clients using a RepNotify function, OnRep\_CurrHealth. The server is authoritative for all health changes: whenever damage or healing occurs, the server updates CurrHealth. When this updated value is received on a client, Unreal automatically invokes OnRep\_CurrHealth for the corresponding character instance on that machine.
+      \begin{figure}[H]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/HealthBar/OnRepFunction}}
+        \caption{OnRep Function}
+        \label{fig:CalcDamage}
+    \end{figure}
+    OnRep\_CurrHealth triggers a custom event (named BS), which is responsible for driving the visual update of the health bar. This event accesses the character’s HealthBar widget component, retrieves its underlying user widget, and casts it to the dedicated HUD widget blueprint (WBP\_HUD). The event then calls the widget’s UpdateHealthBar function, passing both the new health value and a visibility flag derived from IsLocallyControlled, so that a player does not see a bar above their own character but can see bars above other players.
+    \begin{figure}[H]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/HealthBar/BSHealthBar}}
+        \caption{The BS event called by OnRep\_CurrHealth to update the health bar widget.}
+        \label{fig:CalcDamage}
+    \end{figure}
+    Inside WBP\_HUD, UpdateHealthBar converts the raw health value to a 0–1 range, applies it to the progress bar via SetPercent, and adjusts the widget’s visibility accordingly. This design cleanly separates gameplay logic from UI presentation while guaranteeing that all clients display accurate, up‑to‑date health information. Since, the owning player cannot see their own health bar, we create simple healthbar widget and add it to the viewport in the player controller when the game starts.
+    \begin{figure}[H]
+        \centerline{\includegraphics
+        [width=\columnwidth]
+        {Figures/HealthBar/HealthBar}}
+        \caption{UpdateHealthBar Widget}
+        \label{fig:CalcDamage}
+    \end{figure}
+
+    \subsection{Spell CoolDown}
+    The spell cooldown system is implemented as a timestamp-based mechanism in the
+    character, combined with a generic cooldown-bar widget for visual feedback.
+
+    \subsection*{Character-side Logic}
+
+    For each spell the character stores two floating-point variables:
+    \begin{itemize}
+        \item Force Spell Interval, Mass Inc Spell Interval,
+            Ice Spell Interval: the cooldown duration in seconds.
+        \item Force Spell CLDWN, Mass Inc Spell CLDWN,
+            Ice Spell CLDWN: the game time at which that spell was last
+            successfully cast.
+    \end{itemize}
+
+    In BeginPlay, all ... CLDWN values are initialised to 0.0 (meaning
+    ``not used yet''), and the interval values are set (e.g.\ Force = 0.4 s,
+    Ice = 2.0 s). At the same time, a cooldown widget instance is created for each
+    spell using Create Spell Cooldown Bar Widget. These instances are stored in
+    variables such as Force Spell CLDWNWidget, added to the viewport, and then
+    hidden. Only the widget corresponding to the currently selected spell is set
+    to Visible.
+
+    When the player presses Fire, the character first reads the Spell integer from
+    ThirdPersonPlayerController to determine which spell is active. For that spell
+    it computes
+    \[
+    \text{Elapsed} =
+    \text{GetGameTimeSinceCreation(self)} - \text{SpellCLDWN}.
+    \]
+    Elapsed is then compared with the corresponding interval (Spell Interval). If
+    \[
+    \text{Elapsed} \ge \text{Interval},
+    \]
+    the spell is deemed off cooldown and Activate Spell (a server RPC) is called.
+    Immediately afterwards, SpellCLDWN is updated to the current value of
+    GetGameTimeSinceCreation, effectively starting a new cooldown, and that
+    spell’s cooldown widget is made visible.
+
+    \subsection*{Widget-side Logic}
+
+    The SpellCooldown widget maintains its own Time and MaxTime variables. On
+    Event Tick, it runs CountdownBarTimer, which increments Time by DeltaSeconds,
+    clamps it to the interval $[0, \text{MaxTime}]$, and normalises it to the
+    $0$--$1$ range. This normalised value is applied to the progress bar via
+    SetPercent, visually filling the bar as the cooldown elapses. A Delay node
+    using MaxTime then hides the widget once the cooldown duration finishes.
+
+    In summary, the character’s timestamp-based variables enforce the actual
+    gameplay cooldown, while the dedicated widget provides an independent,
+    frame-based visual countdown that reflects the same duration.
+
+
+
+
+
+
+
+
+
 
     \subsection{Game Modes}
     There are three different game modes in the game, Arena Battle, Soccer, and Coin Collection.
