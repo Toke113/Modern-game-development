@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1767145807.21739 "c:/Users/manso/OneDrive/Documents/GitHub/Modern-game-development/SpilTek LaTeX template/Battlemage arena report.tex" "Battlemage arena report.pdf" "Battlemage arena report" 1767145808.86176 0
-  "Battlemage arena report.aux" 1767145808 7459 0f5b07d2dc2fd20b2ba0a648b52fdef3 "pdflatex"
-  "Battlemage arena report.out" 1767145808 3734 ea789a9260db020bbae2c6972e9fe200 "pdflatex"
-  "Battlemage arena report.tex" 1767145802 24001 39784bc048e8925c778fd7409d93834f ""
+["pdflatex"] 1767791253.85554 "c:/Users/manso/OneDrive/Documents/GitHub/Modern-game-development/SpilTek LaTeX template/Battlemage arena report.tex" "Battlemage arena report.pdf" "Battlemage arena report" 1767791256.37621 0
+  "Battlemage arena report.aux" 1767791256 7461 320fb25fc3dc9cb4a1a7b55b5ff2b32f "pdflatex"
+  "Battlemage arena report.out" 1767791256 3734 ea789a9260db020bbae2c6972e9fe200 "pdflatex"
+  "Battlemage arena report.tex" 1767791248 24049 e5ee690c683279cd397781f02cdc19c8 ""
   "C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768654 2172 fd0c924230362ff848a33632ed45dc23 ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/times/ptmb8r.tfm" 1136768654 4524 6bce29db5bc272ba5f332261583fee9c ""
@@ -107,7 +107,7 @@
   "Figures/PlayerController/UIsetup.png" 1767047862 219922 8436a6e8740cf3edf0891ca3685d3544 ""
   "Figures/Spells/ForceChildImpl.png" 1767047862 85749 0d48c9fc163bce0beff3f7eb14cad91c ""
   "IEEEtran.cls" 1759240794 288304 5b2e4fa15b0f7eabb840ebf67df4c0f7 ""
-  "c:/Users/manso/OneDrive/Documents/GitHub/Modern-game-development/SpilTek LaTeX template/Battlemage arena report.tex" 1767145802 24001 39784bc048e8925c778fd7409d93834f ""
+  "c:/Users/manso/OneDrive/Documents/GitHub/Modern-game-development/SpilTek LaTeX template/Battlemage arena report.tex" 1767791248 24049 e5ee690c683279cd397781f02cdc19c8 ""
   (generated)
   "Battlemage arena report.aux"
   "Battlemage arena report.log"

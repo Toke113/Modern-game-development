@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.30)  31 DEC 2025 02:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.12.30)  7 JAN 2026 14:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -368,17 +368,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 ) (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count323
-) (Battlemage arena report.aux
-
-LaTeX Warning: Label `fig:CalcDamage' multiply defined.
-
-
-LaTeX Warning: Label `fig:CalcDamage' multiply defined.
-
-
-LaTeX Warning: Label `fig:CalcDamage' multiply defined.
-
-)
+) (Battlemage arena report.aux)
 \openout1 = `"Battlemage arena report.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
@@ -494,7 +484,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has
                                                   \__shipout_drop_firstpage_...
 l.192     \end{figure}
                        <./Figures/Damage/TjekIfServerOrNotAndCanDamage.png> <./Figures/Damage/CalcDamage.png> <./Figures/Spells/ForceChildImpl.png> <./Figures/HealthBar/OnRepFunction.png>]
-<Figures/HealthBar/HealthBar.png, id=165, 696.201pt x 313.17pt>
+<Figures/HealthBar/HealthBar.png, id=164, 696.201pt x 313.17pt>
 File: Figures/HealthBar/HealthBar.png Graphic file (type png)
 <use Figures/HealthBar/HealthBar.png>
 Package pdftex.def Info: Figures/HealthBar/HealthBar.png  used on input line 197.
@@ -504,57 +494,57 @@ Underfull \hbox (badness 1584) in paragraph at lines 193--200
 []\OT1/ptm/m/n/10 Inside WBP[]HUD, Up-date-Health-Bar con-verts the raw
  []
 
-<Figures/ParentGamemode/Part_Initial_Player_Setup.png, id=166, 842.39719pt x 570.63188pt>
+<Figures/ParentGamemode/Part_Initial_Player_Setup.png, id=165, 842.39719pt x 570.63188pt>
 File: Figures/ParentGamemode/Part_Initial_Player_Setup.png Graphic file (type png)
 <use Figures/ParentGamemode/Part_Initial_Player_Setup.png>
-Package pdftex.def Info: Figures/ParentGamemode/Part_Initial_Player_Setup.png  used on input line 275.
+Package pdftex.def Info: Figures/ParentGamemode/Part_Initial_Player_Setup.png  used on input line 277.
 (pdftex.def)             Requested size: 252.0pt x 170.70328pt.
-<Figures/ParentGamemode/Coin_Next_Part.png, id=167, 749.04843pt x 117.43875pt>
+<Figures/ParentGamemode/Coin_Next_Part.png, id=166, 749.04843pt x 117.43875pt>
 File: Figures/ParentGamemode/Coin_Next_Part.png Graphic file (type png)
 <use Figures/ParentGamemode/Coin_Next_Part.png>
-Package pdftex.def Info: Figures/ParentGamemode/Coin_Next_Part.png  used on input line 285.
+Package pdftex.def Info: Figures/ParentGamemode/Coin_Next_Part.png  used on input line 287.
 (pdftex.def)             Requested size: 252.0pt x 39.50931pt.
 [3
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.294 
+l.296 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.294 
+l.296 
        <./Figures/HealthBar/BSHealthBar.png> <./Figures/HealthBar/HealthBar.png>]
 <Figures/PlayerController/UIsetup.png, id=177, 876.27374pt x 517.935pt>
 File: Figures/PlayerController/UIsetup.png Graphic file (type png)
 <use Figures/PlayerController/UIsetup.png>
-Package pdftex.def Info: Figures/PlayerController/UIsetup.png  used on input line 309.
+Package pdftex.def Info: Figures/PlayerController/UIsetup.png  used on input line 311.
 (pdftex.def)             Requested size: 252.0pt x 148.94861pt.
 <Figures/PlayerController/ChangeSpell.png, id=178, 740.7675pt x 382.42876pt>
 File: Figures/PlayerController/ChangeSpell.png Graphic file (type png)
 <use Figures/PlayerController/ChangeSpell.png>
-Package pdftex.def Info: Figures/PlayerController/ChangeSpell.png  used on input line 320.
+Package pdftex.def Info: Figures/PlayerController/ChangeSpell.png  used on input line 322.
 (pdftex.def)             Requested size: 252.0pt x 130.09407pt.
  [4
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.347 
+l.349 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.347 
+l.349 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.347 
+l.349 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.347 
+l.349 
        <./Figures/ParentGamemode/Part_Initial_Player_Setup.png> <./Figures/ParentGamemode/Coin_Next_Part.png> <./Figures/PlayerController/UIsetup.png> <./Figures/PlayerController/ChangeSpell.png>]
 
 ** Conference Paper **
@@ -572,23 +562,19 @@ Before submitting the final camera ready copy, remember to:
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `"Battlemage arena report".out' has not changed.
 (rerunfilecheck)             Checksum: EA789A9260DB020BBAE2C6972E9FE200;3734.
  ) 
 Here is how much of TeX's memory you used:
- 12153 strings out of 467871
- 192499 string characters out of 5428442
- 628073 words of memory out of 5000000
- 40834 multiletter control sequences out of 15000+600000
+ 12156 strings out of 467871
+ 192549 string characters out of 5428442
+ 628230 words of memory out of 5000000
+ 40837 multiletter control sequences out of 15000+600000
  663023 words of font info for 112 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,899b,467s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "Battlemage arena report.pdf" (5 pages, 1495126 bytes).
+Output written on "Battlemage arena report.pdf" (5 pages, 1495137 bytes).
 PDF statistics:
  244 PDF objects out of 1000 (max. 8388607)
  55 named destinations out of 1000 (max. 500000)
