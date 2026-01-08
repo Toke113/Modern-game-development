@@ -1,4 +1,6 @@
-\documentclass[conference]{IEEEtran} needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
@@ -8,7 +10,6 @@
 \usepackage{mathtools}
 \usepackage{hyperref}
 \usepackage{float}
-\usepackage{amstext}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
 T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -382,8 +383,8 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     \section{Development}
     Xxxxx
 
-    \subsection{Iteration 1}
-    The first iteration was focussed on setting up the project and implementing some basic online functionality.
+   \subsection{Iteration 1}
+    The first iteration was focused on setting up the project and implementing some basic online functionality.
 
     \subsubsection{About}
     The purpose of this iteration was to setup the project and implement basic functionality for testing purposes.
@@ -395,14 +396,16 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
     Finally, we implemented a simple health system for the player, so that colliding with the box would result in the player taking damage.
 
+    We used the built-in systems for synchronization and online play to synchronize the box, the player, and player health.
+    Making it so the player took damage when hit by the box was more challenging.
+    The game only registered a hit when the player walked into the box, not when the box was thrown at the player.
+
     \subsubsection{Evaluation}
     Since the goal of this iteration was to test if the technical aspects of the game worked, testing was done internally in the group.
     After a feature had been developed, it would be playtested on two connected clients that were simulated by the engine.
     The success of this iteration was judged to the extent that the synchronized objects behaved as expected.
 
-    We used the built-in systems for synchronization and online play to synchronize the box, the player, and player health.
-    Making it so the player took damage when hit by the box was more challenging.
-    The game only registered a hit when the player walked into the box, not when the box was thrown at the player.
+
 
     \subsubsection{Reflections and decisions}
     Most systems worked well.
@@ -410,16 +413,57 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     Otherwise, the next iteration would be focussed on adding new features to the game.
 
     \subsection{Iteration 2}
-    This iteration concernedthe development of more mechanics and ensuring that it functioned well to get it ready for user testing.
+    This iteration concerned the development and testing of core mechanics so that we would have a minimum viable product available for testing.
 
     \subsubsection{About}
-    Xxxxx
+    In this iteration, we implemented the following assets and mechanics:
+    \begin{itemize}
+        \item Healthbar
+        \item Basic ragdolling
+        \item Mechanics for force push spell, excluding polish
+        \item Multiple boxes in the default scene, to better test the force push functionality
+        \item Lich player sprite to reinforce the mage fantasy
+        \item IP-based LAN so two people could play each other on different computers on the same network.
+        \item Restart functionality for ease of play and debugging purposes.
+        
+    \end{itemize}
 
     \subsubsection{Evaluation}
-    Xxxxx
+    The game was evaluated with an internal observation test. The team members took turns playing against each other, while one person noted down their comments. This resulted in a document consisting of our notes and finding, which is summarized below. 
 
-    \subsubsection{Reflections and decisions}
-    Xxxxx
+    \subsubsection{Reflections and decisions} 
+
+    While the mechanics mostly worked well, the game clearly lacked polish. The spells lacked a sense oof impact, and certain aspects of the game were unintuitive. A decision was made to include the following polish in the next iteration:
+    \begin{itemize}
+        \item Make it so the player is pushed before standing up again when ragdolling.
+        \item Make aiming easier by including a targeting recticle.
+        \item Increase damage dealt to the player when hit by a box.
+        \item Implement sound and particle effects when the force spell is cast, and a sound effect when it hits a box.
+        \item Implement a sound effect when losing health.
+    \end{itemize}
+
+    The playtest uncovered a number of bugs. While some where being or unlikely to come up, the following were serious enough to warrant immediate attention:
+    \begin{itemize}
+        \item The visual part of the host skeleton was disconnected from the host player character, but only on the client screen. Everything looked fine for the host. Fixed by hitting the invisible host with a box.
+        \item After ragdolling the player only stood up on the host screen, not the client.
+    \end{itemize}
+
+    During the test, it became clear that the existing mechanics could support a number of different game modes, with relatively little implementation required to make them playable. It was also unclear if the existing mode would be the best way to play the game. Therefore, the decision was made to have two MVP's of new game modes ready for the next iteration:
+
+    \textbf{Coin collection}
+    \begin{itemize}
+        \item This level would include a number of coins the player could pickup. The first to pickup a set number of coins would win.
+        \item When taking the damage, the player would lose a portion of their coins.
+    \end{itemize}
+
+    \textbf{Rocket league-like game with the force push spell used to push the ball}
+    \begin{itemize}
+        \item A ball would be placed in the middle of an arena, with a goal on each side. Each goal belonging to a player. 
+        \item The players gain points by shooting the ball into their opponent's goal. The ball would then disappear and respawn in the center of the map.
+        \item The game mode would include a timer, which would countdown to zero. At this point, the player with the msot points would win the game.
+    \end{itemize}
+
+    We also decided to work on the design on new spells to introduce variety and make the game more interesting.
 
     \subsection{Iteration 3}
     Xxxxx
