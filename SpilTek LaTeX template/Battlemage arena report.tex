@@ -15,7 +15,7 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
     \title{Development of Battlemage Arena
-    }
+    }   
 
     \author{\IEEEauthorblockN{1\textsuperscript{st} Toke Odgaard-Jans}
     \IEEEauthorblockA{toodg22@student.sdu.dk }
@@ -144,8 +144,8 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     \subsection{Ragdoll}
 
     \subsection{Parent Spell Blueprint}
-    A parent spell blueprint is created to a standard way to "fire" a spell.
-    So when spells are created by differnt people the way to cast them is the same.
+    A parent spell blueprint is created to have a standard way to "fire" a spell.
+    So when spells are created by different people, the way to cast them is the same.
     The event in the parent blueprint is called "Activate Spell".
 
     \begin{figure}[htbp]
@@ -346,13 +346,13 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     This is to tell the HUD which gamemode is currently being played so it can update the display accordingly.
     It is also used to enble gamemode specific features in the player character blueprint, depending on the "gamemode int" value the healthbar will show.
     The reason to have the "gamemode int" variable in the gamestate is that gamestates are replicated to clients, and gamemodes are not.
-    So a client, not the hosting client which is also the server, would not be able to see the "gamemode int" if it where in the gamemode.
+    So a client, not the hosting client who is the server, would not be able to see the "gamemode int" if it where to be in the gamemode blueprint.
 
 
     \subsection{HUD}
     The HUD that is displayed to the player is made using the UserWidget blueprint.
     Multiple are being used at the same time to display the different elements of the HUD.
-    And with multople gamemodes, some UI elements are only nesserary for certain gamemodes.
+    And with multiple gamemodes, some UI elements are only nesserary for certain gamemodes.
     So the approach to making the HUD was to be modular, and make small wigdets that only handled onw thing.
     Then in the Player Controller called BPThirdPersonPlayerController, in the function called "UI Setup" was made.
     In "UI Setup" all the widgtes are created and added to the viewport depending on the gamemode.
