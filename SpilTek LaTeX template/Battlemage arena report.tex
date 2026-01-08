@@ -1,6 +1,4 @@
-\documentclass[conference]{IEEEtran}
-\IEEEoverridecommandlockouts
-% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\documentclass[conference]{IEEEtran}Figures//Spells//IceSpell/icespellprojectileblueprinty needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
@@ -10,6 +8,7 @@
 \usepackage{mathtools}
 \usepackage{hyperref}
 \usepackage{float}
+\usepackage{amstext}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
 T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -169,6 +168,60 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     When these raycasts hit a "BPSyncedBox" object, the "Apply Force" function is called on the hit object to make it move.
 
     \subsubsection{Ice Spell}
+
+    The ice spell, as described in \autoref{subsec:main-mechanics}, is intended to create an area of low friction.
+    In the ice spell component blueprint, when the "Activate Spell" event is called, the event retrieves the player who cast the spell.
+    From the player, the world transform of the spell point is obtained and then broken into location and scale.
+    The world rotation of the player's camera is then retrieved and used to create a new transform together with the scale and location retrieved from the spell point.
+    This new transform serves as the spawn transform for the ice projectile actor (see \autoref{fig:icespellblueprint}).
+
+
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=1\linewidth]{Figures/Spells/IceSpell/icespellblueprint}
+        \caption{The ice spell blueprint. When the event is called, it spawns a ice projectile.}
+        \label{fig:icespellblueprint}
+    \end{figure}
+
+    The ice projectile has a ProjectileMovement component, which means it already has forward velocity when it spawns.
+    If the projectile detects a hit with any object, it first checks if it is on the server; if not, it stops.
+    If it is on the server, it then calls the "CreateIceField" event.
+    In this event, it retrieves the world transform of the ice ball and uses this transform to spawn the "Ice Field" actor.
+    After that, it activates the hit particle effect and plays a sound at the location.
+    Finally, the projectile then destroys itself (see \autoref{fig:iceprojectile}).
+
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=1\linewidth]{Figures//Spells//IceSpell/icespellprojectileblueprint}
+        \caption{The ice spell projectile. When it hits something it spawns an ice field.}
+        \label{fig:iceprojectile}
+    \end{figure}
+
+
+    The "Ice Field" actor has a sphere collision component as its root and contains a particle emitter that spawns snow particles inside the collision field.
+    When an actor overlaps with the collider or exits the overlap, it first checks if the event is triggered on the server.
+    If this is the case, it calls the "Friction On and Off" event, which replicates the change to all clients.
+    This event then calls the "SetFriction" function (see \autoref{fig:icezone}).
+
+
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=1\linewidth]{Figures//Spells//IceSpell/icefieldactoroverlap}
+        \caption{Ice field blueprint. When an actor overlaps with the collider it calls the set friction function.}
+        \label{fig:icezone}
+    \end{figure}
+
+    In the "SetFriction" function, it checks whether the entering actor is a player or a synced object.
+    If it is a player, it accesses the movement component of the player controller and sets the "Ground Friction" and "Braking Deceleration Walking" to the specified values.
+    If the actor is a synced object, it accesses the mesh component of the actor and sets the physics material to the specified physics material (see \autoref{fig:SetFrictionFunction}).
+
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=1\linewidth]{Figures//Spells//IceSpell/SettingFrictionFunc}
+        \caption{Function which sets the friction.}
+        \label{fig:SetFrictionFunction}
+    \end{figure}
+
 
     \subsubsection{Mass Increase}
     When the growth spell is cast, we set an increment factor (IncFactor) to 1.15, corresponding to a 15\% increase in size and mass. We then perform a raycast (line trace), similar to the one used for the Force spell, and read the resulting HitResult. If the hit actor is of type BP\_Synced\_Box, we first access its Static Mesh Component and obtain its current mass. This mass is multiplied by IncFactor, and the new value is applied using the Set Mass Override function. Next, we retrieve the actor’s root scene component, read its current world scale, multiply each axis of the scale by IncFactor, and write the result back using Set World Scale 3D. Consequently, each successful cast of the spell makes the targeted box uniformly larger and heavier.
